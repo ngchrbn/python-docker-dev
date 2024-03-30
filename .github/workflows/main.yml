@@ -1,11 +1,9 @@
 name: ci
 
-
 on:
   push:
     branches:
       - main
-
 
 jobs:
   build:
@@ -24,12 +22,9 @@ jobs:
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       -
-        name: Print Image Tag
-        run: echo ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repositoy.name }}:latest
-      # -
-      #   name: Build and push
-      #   uses: docker/build-push-action@v5
-      #   with:
-      #     context: .
-      #     push: true
-      #     tags: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repositoy.name }}:latest
+        name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
